@@ -128,7 +128,17 @@ int main(int argc,char *argv[])
 			}
 			else if(sfd == events[i].data.fd)
 			{
-								
+				while(1)
+				{
+					struct sockaddr in_addr;
+					socklen_t in_len;
+					int infd;
+					char hbuf[NI_MAXHOST],sbuf[NI_MAXHOST];
+
+					in_len = sizeof in_addr;
+					infd = accept(sfd,&in_addr,&in_len);
+
+				}
 			}
 		}		
 	}
