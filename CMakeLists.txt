@@ -1,0 +1,2 @@
+INCLUDE_DIRECTORIES(tHiredis/hiredis)
+ADD_SUBDIRECTORY(tHiredis)
