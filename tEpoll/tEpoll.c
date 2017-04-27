@@ -137,12 +137,67 @@ int main(int argc,char *argv[])
 
 					in_len = sizeof in_addr;
 					infd = accept(sfd,&in_addr,&in_len);
+					if (infd==-1)
+					{
+						break;
+					}
 
+					s = getnameinfo(&in_addr,in_len,hbuf,sizeof hbuf,subf,sizeof sbuf,
+						NI_MUMERICHOST|NI_NUMERICSERV);
+					if (s == 0)
+						printf("Accept cpnnect is not connect\n");
+					s=make_socket_non_blocking(infd);
+					if (s==-1)
+						abort();
+					event.data.fd = infd;
+					event.events = EPOLLIN|EPOLLET;
+					s=epoll_ctl(efd,EPOLL_CTL_ADD,infd,&event);
+					if (s == -1)
+					{
+						perror("epoll_ctl is reconnect");
+						abort();
+					}
+				}
+				continue;
+			}
+			else
+			{
+				int done = 0;
+				whil(1)
+				{
+					ssize_t count;
+					char buf[512];
+					count = read(event[i].data.fd,buf,sizeof(buf));
+					if (count == -1)
+					{
+						break;
+					}
+					else if(count == 0)
+					{
+						done = 1;
+						break;
+					}
+					s = write(1,buf,count);
+					if (s==-1)
+					{
+						perror("write");
+						abort();
+					}
+				}
+
+				if (done)
+				{
+					printf("closed connect on descriptor \n");
+					close(events[i].data.fd);
 				}
 			}
 		}		
 	}
 
+	free(events);
+	close(sfd);
+
+	return EXIT_SUCCESS;
 }
 
 
