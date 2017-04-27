@@ -210,7 +210,7 @@ int main(int argc,char *argv[])
 
 					char str[] = "hello world!";
 					write(events[i].data.fd,str,sizeof(str));
-
+					send(events[i].data.fd,str,sizeof(str));
 					printf(" get info form client =%s\n",buf );
 					if (s==-1)
 					{
