@@ -39,7 +39,7 @@ static int create_and_bind(char *port)
 	}
 	if(rp==NULL)
 	{
-		fprintf(stdree,"Could not bind.\n");
+		fprintf(stderr,"Could not bind.\n");
 		return -1;
 	}
 
@@ -167,7 +167,7 @@ int main(int argc,char *argv[])
 				{
 					ssize_t count;
 					char buf[512];
-					count = read(event[i].data.fd,buf,sizeof(buf));
+					count = read(events[i].data.fd,buf,sizeof(buf));
 					if (count == -1)
 					{
 						break;
