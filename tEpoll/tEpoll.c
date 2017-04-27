@@ -174,7 +174,7 @@ int main(int argc,char *argv[])
 					ssize_t count;
 					char buf[512];
 					count = read(events[i].data.fd,buf,sizeof(buf));
-					printf("count is now %d\n", count);
+					printf("count is now %d\n", int(count));
 					if (count == -1)
 					{
 						break;
