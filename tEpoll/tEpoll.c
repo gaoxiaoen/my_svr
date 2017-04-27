@@ -145,7 +145,8 @@ int main(int argc,char *argv[])
 					s = getnameinfo(&in_addr,in_len,hbuf,sizeof hbuf,sbuf,sizeof sbuf,
 						NI_NUMERICHOST|NI_NUMERICSERV);
 					if (s == 0)
-						printf("Accept cpnnect is not connect\n");
+						printf("Accept cpnnect is on descriptor %d"
+							"(host=%s,[port=%s])\n",infd,hbuf,sbuf);
 					s=make_socket_non_blocking(infd);
 					if (s==-1)
 						abort();
