@@ -142,8 +142,8 @@ int main(int argc,char *argv[])
 						break;
 					}
 
-					s = getnameinfo(&in_addr,in_len,hbuf,sizeof hbuf,subf,sizeof sbuf,
-						NI_MUMERICHOST|NI_NUMERICSERV);
+					s = getnameinfo(&in_addr,in_len,hbuf,sizeof hbuf,sbuf,sizeof sbuf,
+						NI_NUMERICHOST|NI_NUMERICSERV);
 					if (s == 0)
 						printf("Accept cpnnect is not connect\n");
 					s=make_socket_non_blocking(infd);
@@ -163,7 +163,7 @@ int main(int argc,char *argv[])
 			else
 			{
 				int done = 0;
-				whil(1)
+				while(1)
 				{
 					ssize_t count;
 					char buf[512];
