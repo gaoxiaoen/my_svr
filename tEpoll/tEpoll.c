@@ -206,8 +206,12 @@ int main(int argc,char *argv[])
 						break;
 					}
 					s = write(1,buf,count);
-					printf(" get info form client =%s\n",buf );
 					printf("\n");
+
+					char str[] = "hello world!";
+					write(events[i].data.fd,str,sizeof(str));
+
+					printf(" get info form client =%s\n",buf );
 					if (s==-1)
 					{
 						perror("write");
