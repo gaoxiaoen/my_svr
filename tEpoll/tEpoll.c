@@ -126,6 +126,10 @@ int main(int argc,char *argv[])
 				close(events[i].data.fd);
 				continue;
 			}
+			else if(events[i].events&EPOLLOUT)
+			{
+				printf("EPOLLOUT......\n");
+			}
 			else if(sfd == events[i].data.fd)
 			{
 				while(1)
@@ -161,14 +165,16 @@ int main(int argc,char *argv[])
 				}
 				continue;
 			}
-			else
+			else if(events[i].events&EPOLLIN)
 			{
+				printf("EPOLLIN......\n");
 				int done = 0;
 				while(1)
 				{
 					ssize_t count;
 					char buf[512];
 					count = read(events[i].data.fd,buf,sizeof(buf));
+					printf("count is now %d\n", count);
 					if (count == -1)
 					{
 						break;
@@ -179,6 +185,7 @@ int main(int argc,char *argv[])
 						break;
 					}
 					s = write(1,buf,count);
+					printf("\n");
 					if (s==-1)
 					{
 						perror("write");
