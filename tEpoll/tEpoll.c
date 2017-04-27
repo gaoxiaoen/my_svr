@@ -174,6 +174,27 @@ int main(int argc,char *argv[])
 					ssize_t count;
 					char buf[512];
 					count = read(events[i].data.fd,buf,sizeof(buf));
+					/*
+					#if defined(_MSC_VER)
+						#define JL_SIZE_T_SPECIFIER "%Iu"
+						#define JL_SSIZE_T_SPECIFIER "%Id"
+						#define JL_PTRDIFF_T_SPECIFIER "%Id"
+					#elif defined(__GNUC__)
+						#define JL_SIZE_T_SPECIFIER "%zu"
+						#define JL_SSIZE_T_SPECIFIER "%zd"
+						#define JL_PTRDIFF_T_SPECIFIER "%zd"
+					#else // TODO figure out which to use.
+						#if NUMBITS == 32
+							#define JL_SIZE_T_SPECIFIER something_unsigned
+							#define JL_SSIZE_T_SPECIFIER something_signed
+							#define JL_PTRDIFF_T_SPECIFIER something_signed
+						#else
+							#define JL_SIZE_T_SPECIFIER something_bigger_unsigned
+							#define JL_SSIZE_T_SPECIFIER something_bigger_signed
+							#define JL_PTRDIFF_T_SPECIFIER something-bigger_signed
+						#endif
+					#endif			
+					 */
 					printf("count is now %zd\n", count);
 					if (count == -1)
 					{
@@ -185,6 +206,7 @@ int main(int argc,char *argv[])
 						break;
 					}
 					s = write(1,buf,count);
+					printf(" get info form client =%s\n",buf );
 					printf("\n");
 					if (s==-1)
 					{
