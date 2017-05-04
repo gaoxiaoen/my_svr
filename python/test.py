@@ -6,7 +6,7 @@ s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 print "done"
 print "connect to 192.168.87.129"
-s.connect(("192.168.87.129",7078))
+s.connect(("192.168.87.129",7707))
 while True:
 	print "ye ,,"
 	sr = raw_input("send msg for 'q' is quit:")
